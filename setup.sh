@@ -103,7 +103,7 @@ WARNING_SCRIPT="/usr/local/bin/unattended-warn-users-before-reboot.sh"
 sudo tee "$WARNING_SCRIPT" > /dev/null << 'EOF'
 #!/bin/bash
 
-echo "⚠️  System will reboot in 10 minutes for security updates. Save your work! ⚠️" | wall
+echo "\n ⚠️  System will reboot in 10 minutes for security updates. Save your work! ⚠️" | wall
 EOF
 
 sudo chmod +x "$WARNING_SCRIPT"
@@ -114,9 +114,9 @@ CRON_FILE="/etc/crontab"
 CRON_JOB="50 2 * * * root [ -f /var/run/reboot-required ] && $WARNING_SCRIPT"
 if ! sudo grep -qF "$WARNING_SCRIPT" "$CRON_FILE"; then
     echo "$CRON_JOB" | sudo tee -a "$CRON_FILE" > /dev/null
-    echo "✅  Cron job added: Runs at 02:50 if a reboot is required."
+    echo -e "\n ✅  Cron job added: Runs at 02:50 if a reboot is required."
 else
-    echo "✅  Cron job already exists. No changes made."
+    echo -e "\n ✅  Cron job already exists. No changes made."
 fi
 
 echo -e "\n 🟩  Restarting unattended-upgrades service..."
