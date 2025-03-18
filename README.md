@@ -1,10 +1,10 @@
 # Digital Ocean CIS Setup
 
-This repository provides a quick setup for a Debian Linux server. The configuration is designed to be simple and easy to set up on a DigitalOcean droplet or similar server environments.
+This repository provides a quick setup for a Debian based Linux server. The configuration is designed to be simple and easy to set up on a Digital Ocean droplet or similar server environments.
 
 ## Prerequisites
 
--A server running Debian 12
+-A server running Debian based system
 -Access to the server via SSH
 
 ## Configuration
@@ -13,7 +13,7 @@ This repository provides a quick setup for a Debian Linux server. The configurat
 
 ## Quickstart
 
-Paste the single line command. It will prompt to enter domain and email address:
+Paste the single line command:
 
     sudo apt install git -y && \
     cd ~ && \
