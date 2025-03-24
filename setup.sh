@@ -125,7 +125,24 @@ systemctl restart unattended-upgrades
 echo -e "\n 🟩  Testing security updates (dry-run)..."
 unattended-upgrades --dry-run --debug
 
-# Suggest reboot
+## Generate SSH key pair only if it doesn't already exist.
+echo -e "\n 🟩  Checking if SSH key pair already exists..."
+
+if [ ! -f ~/.ssh/id_rsa ]; then
+    echo -e "\n 🟩  Generating new SSH key pair..."
+    ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
+else
+    echo -e "\n 🟩  SSH key pair already exists. Skipping generation."
+fi
+
+# Display public key
+echo
+echo -e "\n 🟩  Your SSH public key for the server..."
+echo
+cat ~/.ssh/id_rsa.pub
+echo
+
+## Suggest reboot
 echo -e "\n ✅  Hardening complete"
 
 # Check if reboot is required. If file exists, reboot.
