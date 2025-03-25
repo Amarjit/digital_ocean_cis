@@ -72,7 +72,7 @@ echo -e "\n 🟩  Generating log files of CIS audit"
 
 # Get failed configs
 echo -e "\n 🟩  Generating list of rules that failed to apply"
-grep "KO" log.txt > $LOG_PATH_MODULES/errors.log
+grep "KO" $LOG_PATH_MODULES/audit.log > $LOG_PATH_MODULES/errors.log
 
 ## Setup unattended upgrades
 echo -e "\n 🟩  Installing automated daily updates"
