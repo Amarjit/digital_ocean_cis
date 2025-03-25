@@ -8,12 +8,12 @@ source .env
 echo -e "\n 🟩  Updating system"
 DEBIAN_FRONTEND=noninteractive apt-get install --only-upgrade openssh-server -y
 
-apt update &&
-apt upgrade -y &&
+apt update > /dev/null 2>&1 && \
+apt upgrade -y > /dev/null 2>&1
 
 # GIT.
 echo -e "\n 🟩  Installing GIT"
-apt install git -y
+apt install git -y > /dev/null 2>&1
 
 echo -e "\n 🟩  Removing legacy filesystems"
 echo "install freevxfs /bin/true" >> /etc/modprobe.d/blacklist.conf
