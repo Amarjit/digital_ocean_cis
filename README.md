@@ -1,6 +1,6 @@
 # Digital Ocean CIS Setup
 
-This repository provides a quick setup for a Debian based Linux server. The configuration is designed to be simple and easy to set up on a Digital Ocean droplet or similar server environments.
+This repository provides a quick setup for hardening a Debian based Linux server. The configuration is designed to be simple and easy to set up on a Digital Ocean droplet or similar server environments.
 
 ## Prerequisites
 
