@@ -96,6 +96,10 @@ else
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 fi
 
+# Add SSHD to libwrap (TCP Wrapper)
+echo -e "\n 🟩  Allowing remote SSH connections"
+echo "sshd: ALL" >> /etc/hosts.allow
+
 # Reload SSHD
 echo -e "\n 🟩  Reloading SSH config"
 systemctl reload sshd
