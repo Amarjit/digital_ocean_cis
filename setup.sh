@@ -88,6 +88,18 @@ sed -i 's/^status=[^ ]*/status=disabled/' etc/conf.d/2.2.*.cfg
 echo -e "\n 🟩  Applying hardening to OS"
 ./bin/hardening.sh --apply
 
+# Reenable Root login from SSH hardening
+echo -e "\n 🟩  Modifying SSH to allow root login"
+if grep -q '^PermitRootLogin' /etc/ssh/sshd_config; then
+    sed -i 's/^PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
+else
+    echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
+# Reload SSHD
+echo -e "\n 🟩  Reloading SSH config"
+systemctl reload sshd
+
 # Log files
 mkdir -p "$LOG_PATH_MODULES"
 
