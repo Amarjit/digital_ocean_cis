@@ -4,13 +4,13 @@
 source .env
 
 # Starting
-echo -e "\n 🟩 Starting..."
+echo -e "\n 🟩  Starting..."
 
 # Check if SSH_PUBLIC_KEY is set, uncommented, and not empty
 if grep -Eq '^[[:space:]]*SSH_PUBLIC_KEY="[^"]+"' .env && [ -n "$SSH_PUBLIC_KEY" ]; then
-    echo -e "\n ✅ Checking SSH client public key has been added to .env"
+    echo -e "\n ✅  Checking SSH client public key has been added to .env"
 else
-    echo -e "\n ❌ SSH client public key has not been set in .env. Set public and and then rerun `setup.sh`"
+    echo -e "\n ❌  SSH client public key has not been set in .env. Set public and and then rerun `setup.sh`"
     echo -e "\n Aborted"
     exit 1
 fi
@@ -22,9 +22,9 @@ chmod 700 /root/.ssh
 if ! grep -Fxq "$SSH_PUBLIC_KEY" /root/.ssh/authorized_keys; then
     echo "$SSH_PUBLIC_KEY" >> /root/.ssh/authorized_keys
     chmod 600 /root/.ssh/authorized_keys
-    echo -e "\n ✅ Added SSH client public key to /root/.ssh/authorized_keys"
+    echo -e "\n ✅  Added SSH client public key to /root/.ssh/authorized_keys"
 else
-    echo -e "\n 🟩 SSH client public key is already present in /root/.ssh/authorized_keys"
+    echo -e "\n 🟩  SSH client public key is already present in /root/.ssh/authorized_keys"
 fi
 
 # Update OS
