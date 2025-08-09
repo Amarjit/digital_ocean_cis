@@ -10,7 +10,7 @@ echo -e "\n 🟩 Starting..."
 if grep -Eq '^[[:space:]]*SSH_PUBLIC_KEY="[^"]+"' .env && [ -n "$SSH_PUBLIC_KEY" ]; then
     echo -e "\n ✅ Checking SSH client public key has been added to .env"
 else
-    echo -e "\n ❌ SSH client public key has not been set in .env."
+    echo -e "\n ❌ SSH client public key has not been set in .env. Set public and and then rerun `setup.sh`"
     echo -e "\n Aborted"
     exit 1
 fi
