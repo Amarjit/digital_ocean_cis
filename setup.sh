@@ -3,6 +3,30 @@
 # Load env.
 source .env
 
+# Starting
+echo -e "\n 🟩 Starting..."
+
+# Check if SSH_PUBLIC_KEY is set, uncommented, and not empty
+if grep -Eq '^[[:space:]]*SSH_PUBLIC_KEY="[^"]+"' .env && [ -n "$SSH_PUBLIC_KEY" ]; then
+    echo "✅ SSH client public key has been set in .env"
+else
+    echo "❌ SSH client public key has been set in .env."
+    echo "Aborted"
+    exit 1
+fi
+
+# Add SSH client public key
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+
+if ! grep -Fxq "$SSH_PUBLIC_KEY" ~/.ssh/authorized_keys; then
+    echo "$SSH_PUBLIC_KEY" >> ~/.ssh/authorized_keys
+    chmod 600 ~/.ssh/authorized_keys
+    echo "✅ Added SSH client public key to ~/.ssh/authorized_keys"
+else
+    echo "🟩 SSH client public key is already present in ~/.ssh/authorized_keys"
+fi
+
 # Update OS
 # Before running generic update. Lets sort out openssh interactive issue with debconf. So we will upgrade package to latest.
 echo -e "\n 🟩  Updating system"
@@ -134,8 +158,7 @@ unattended-upgrades --dry-run --debug
 ## Suggest reboot
 echo -e "\n ✅  Hardening complete"
 
-## Remind to setup SSH or you will be locked out
-echo -e  "\n ⚠️  Setup SSH NOW with your public SSH keypair to authorized_keys, set 'PermitRootLogin yes' in sshd_config, set 'sshd: ALL' in hosts.allow. If you fail to do this before reboot, you will lose access to your server ⚠️"
-
 # Check if reboot is required. If file exists, reboot.
 if [ -f /var/run/reboot-required ]; then echo -e "\n ⚠️  Reboot required  ⚠️"; fi
+
+exit 0

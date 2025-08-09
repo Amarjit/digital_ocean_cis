@@ -5,6 +5,7 @@ This repository provides a quick setup for hardening a Debian based Linux server
 ## Prerequisites
 
 -A server running Debian based system
+-Locally generated SSH keypair
 -Access to the server via SSH
 
 ## Configuration
@@ -12,6 +13,12 @@ This repository provides a quick setup for hardening a Debian based Linux server
 -None
 
 ## Quickstart
+
+Create your SSH keypair locally with the specified comment:
+
+    ssh-keygen -t ed25519 client_ssh_public_key_ed25519
+
+Set your SSH public key (.pub) in the `.env` file and uncomment the line.
 
 Paste the single line command:
 
